@@ -28,8 +28,6 @@ if st.button('Condicion de vehiculos'):
                  title="Condicion de los vehiculos")
     st.plotly_chart(fig)
     
-st.header("o")
-
 if st.button('Modelo y Precio'):
     long_format_data = car_data.groupby(['PRICE', 'MODEL']).size().reset_index(name='Numero de Vehiculos')
     
