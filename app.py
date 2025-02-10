@@ -17,20 +17,23 @@ car_data['date_posted'] = pd.to_datetime(car_data['date_posted'])
 car_data['is_4wd'] = car_data['is_4wd'].fillna('0').astype('int')
 car_data.columns = car_data.columns.str.upper()
 
-st.title("Cuadro de Mandos de Vehículos")
+st.title("Venta de Vehículos")
 st.header("Análisis de Datos de Vehículos en Venta")
-st.header("Base de Datos:")
-st.write(car_data)
-
 st.header("Escoge el tipo de grafica")
 
-if st.button('Relacion del estado de venta y su precio'):
-    fig = px.histogram(car_data, x='CONDITION', y='PRICE', title="Histograma de Estado y Precios de Vehículos", labels={'CONDITION': 'Estado', 'PRICE': 'Precio'})
+if st.button('Condicion de vehiculos'):
+    long_format_data = car_data.groupby(['CONDITION', 'ODOMETER']).size().reset_index(name='Count')
+    
+    fig = px.bar(long_format_data, x='CONDITION', y='Count', color='ODOMETER', 
+                 title="Condicion de los vehiculos", labels={'Count': 'Número de Vehículos'})
     st.plotly_chart(fig)
 
-if st.button('Generar Gráfico de Barras de Modelos por Año'):
-    long_format_data = car_data.groupby(['CONDITION', 'TYPE']).size().reset_index(name='Count')
+if st.button('Modelo y Precio'):
+    long_format_data = car_data.groupby(['PRICE', 'MODEL_YEAR']).size().reset_index(name='Count')
     
-    fig = px.bar(long_format_data, x='CONDITION', y='Count', color='TYPE', 
-                 title="Autos por calidad de estado", labels={'Count': 'Número de Vehículos'})
+    fig = px.bar(long_format_data, x='PRICE', y='Count', color='MODEL_YEAR', 
+                 title="Condicion del tipo de autos", labels={'Count': 'Número de Vehículos'})
     st.plotly_chart(fig)
+
+st.header("Fuente de Datos:")
+st.write(car_data)
