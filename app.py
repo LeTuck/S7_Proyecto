@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Cargar los datos
-car_data = pd.read_csv("../vehicles_us.csv")
+car_data = pd.read_csv("vehicles_us.csv")
 
 # Crear la interfaz de la aplicación
 st.title("Cuadro de Mandos de Vehículos")
