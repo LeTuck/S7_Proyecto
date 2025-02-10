@@ -1,6 +1,7 @@
 [server]
 headless = true
-port = $PORT  # Se usa el puerto asignado por Render
+port = 10000
 
 [browser]
 serverAddress = "0.0.0.0"
+serverPort = 10000
