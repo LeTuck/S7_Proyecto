@@ -23,16 +23,16 @@ st.header("Escoge el tipo de grafica")
 
 
 if st.button('Condicion de vehiculos'):
-    long_format_data = car_data.groupby(['CONDITION', 'ODOMETER']).size().reset_index(name='Numero de Vehiculos')
+    long_format_data = car_data.groupby(['CONDITION', 'TYPE']).size().reset_index(name='Numero de Vehiculos')
     
-    fig = px.bar(long_format_data, x='CONDITION', y='Numero de Vehiculos', color='ODOMETER', 
+    fig = px.bar(long_format_data, x='CONDITION', y='Numero de Vehiculos', color='TYPE', 
                  title="Condicion de los vehiculos")
     st.plotly_chart(fig)
 
 if st.button('Modelo y Precio'):
-    long_format_data = car_data.groupby(['PRICE', 'MODEL_YEAR']).size().reset_index(name='Numero de Vehiculos')
+    long_format_data = car_data.groupby(['PRICE', 'MODEL']).size().reset_index(name='Numero de Vehiculos')
     
-    fig = px.bar(long_format_data, x='PRICE', y='Numero de Vehiculos', color='MODEL_YEAR', 
+    fig = px.bar(long_format_data, x='PRICE', y='Numero de Vehiculos', color='MODEL', 
                  title="Modelo y Precio")
     st.plotly_chart(fig)
 
