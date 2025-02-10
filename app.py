@@ -36,31 +36,3 @@ if st.button("Generar Histogramas"):
     for column in car_data.select_dtypes(include=['int64', 'float64']).columns:
         fig = px.histogram(car_data, x=column, title=f"Histograma de {column}")
         st.plotly_chart(fig)
-
-# Crear una casilla de verificación
-st.subheader("Selecciona las columnas para construir los histogramas:")
-
-columns_to_plot = car_data.select_dtypes(include=["int64", "float64"]).columns
-
-
-selected_columns = []
-for column in columns_to_plot:
-    if st.checkbox(f"Mostrar histograma de {column}", True):
-        selected_columns.append(column)
-
-# Botón para generar los histogramas
-if st.button("Generar Histogramas"):
-    for column in selected_columns:
-        # Crear el histograma usando plotly-express
-        fig = px.histogram(car_data, x=column, title=f"Histograma de {column}")
-        st.plotly_chart(fig)
-
-# Información adicional
-st.write("Este es un análisis interactivo del conjunto de datos de vehículos.")
-
-    
-    
-    
-    
-    
-
