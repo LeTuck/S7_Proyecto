@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 
 car_data = pd.read_csv("vehicles_us.csv")
-st.markdown("<title>Proyecto S7 - Alfredo Gonzalez Mendez</title>", unsafe_allow_html=True)
 
 car_data['model_year'] = car_data['model_year'].fillna(car_data['model_year'].mean()).astype(int)
 car_data['model'] = car_data['model'].str.upper()
