@@ -23,7 +23,7 @@ st.header("Base de Datos:")
 st.write(car_data)
 
 if st.button('Generar Histograma de Precios y Estado'):
-    fig = px.histogram(car_data, x='CONDITION, y= 'PRICE', title="Histograma de Estado y Precios de Vehículos")
+    fig = px.histogram(car_data, x='CONDITION', y= 'PRICE', title="Histograma de Estado y Precios de Vehículos")
     st.plotly_chart(fig)
 
 
