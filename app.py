@@ -28,11 +28,15 @@ if st.button("Mostrar Histograma de Precios"):
     fig = px.histogram(car_data, x="PRICE", title="Distribución de Precios de Vehículos")
     st.plotly_chart(fig)
 
-# Botón para seleccionar columnas y combinarlas
-def plot_combined_histogram(columns):
-    fig = px.histogram(car_data, x=columns, title=f"Distribución Combinada: {', '.join(columns)}")
-    st.plotly_chart(fig)
+if st.button("Generar Histogramas"):
+    # Mostrar el DataFrame
+    st.write(car_data)
+    
+    # Crear un histograma para cada columna numérica
+    for column in car_data.select_dtypes(include=['int64', 'float64']).columns:
+        fig = px.histogram(car_data, x=column, title=f"Histograma de {column}")
+        st.plotly_chart(fig)
 
-columns = st.multiselect("Selecciona columnas para combinar:", car_data.columns)
-if st.button("Mostrar Histograma Combinado") and columns:
-    plot_combined_histogram(columns)
+# Agregar un mensaje opcional si el DataFrame tiene una gran cantidad de filas
+if len(car_data) > 1000:
+    st.warning("Este conjunto de datos es grande. Puede que tarde un poco en cargar los gráficos.")
