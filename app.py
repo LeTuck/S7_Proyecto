@@ -21,18 +21,19 @@ st.title("Venta de Vehículos")
 st.header("Análisis de Datos de Vehículos en Venta")
 st.header("Escoge el tipo de grafica")
 
+
 if st.button('Condicion de vehiculos'):
-    long_format_data = car_data.groupby(['CONDITION', 'ODOMETER']).size().reset_index(name='Count')
+    long_format_data = car_data.groupby(['CONDITION', 'ODOMETER']).size().reset_index(name='Numero de Vehiculos')
     
-    fig = px.bar(long_format_data, x='CONDITION', y='Count', color='ODOMETER', 
-                 title="Condicion de los vehiculos", labels={'Count': 'Número de Vehículos'})
+    fig = px.bar(long_format_data, x='CONDITION', y='Numero de Vehiculos', color='ODOMETER', 
+                 title="Condicion de los vehiculos")
     st.plotly_chart(fig)
 
 if st.button('Modelo y Precio'):
-    long_format_data = car_data.groupby(['PRICE', 'MODEL_YEAR']).size().reset_index(name='Count')
+    long_format_data = car_data.groupby(['PRICE', 'MODEL_YEAR']).size().reset_index(name='Numero de Vehiculos')
     
-    fig = px.bar(long_format_data, x='PRICE', y='Count', color='MODEL_YEAR', 
-                 title="Condicion del tipo de autos", labels={'Count': 'Número de Vehículos'})
+    fig = px.bar(long_format_data, x='PRICE', y='Numero de Vehiculos', color='MODEL_YEAR', 
+                 title="Modelo y Precio")
     st.plotly_chart(fig)
 
 st.header("Fuente de Datos:")
