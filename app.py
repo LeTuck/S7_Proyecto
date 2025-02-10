@@ -25,12 +25,12 @@ st.write(car_data)
 st.header("Escoge el tipo de grafica")
 
 if st.button('Generar Histograma de Precios y Estado'):
-    fig = px.histogram(car_data, x='CONDITION', y= 'PRICE', title="Histograma de Estado y Precios de Vehículos", labels={'PRICE': 'PRECIOS'})
+    fig = px.histogram(car_data, x='CONDITION', y='PRICE', title="Histograma de Estado y Precios de Vehículos", labels={'CONDITION': 'Estado', 'PRICE': 'Precio'})
     st.plotly_chart(fig)
 
 if st.button('Generar Gráfico de Barras de Modelos por Año'):
     long_format_data = car_data.groupby(['MODEL_YEAR', 'MODEL']).size().reset_index(name='Count')
     
-    fig = px.bar(long_format_data, x='CONDITION', y='Count', color='MODEL', 
+    fig = px.bar(long_format_data, x='MODEL_YEAR', y='Count', color='MODEL', 
                  title="Distribución de Modelos por Año", labels={'Count': 'Número de Vehículos'})
     st.plotly_chart(fig)
