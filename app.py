@@ -22,17 +22,19 @@ car_data.columns = car_data.columns.str.upper()
 # Crear la interfaz de la aplicación
 st.title("Cuadro de Mandos de Vehículos")
 st.header("Análisis de Datos de Vehículos en Venta")
+st.header("Base de Datos:")
+st.write(car_data)
 
 # Botón para mostrar histograma de precios
 if st.button("Mostrar Histograma de Precios"):
     fig = px.histogram(car_data, x="PRICE", title="Distribución de Precios de Vehículos")
     st.plotly_chart(fig)
-
-if st.button("Generar Histogramas"):
-    # Mostrar el DataFrame
-    st.write(car_data)
     
-    # Crear un histograma para cada columna numérica
-    for column in car_data.select_dtypes(include=['int64', 'float64']).columns:
-        fig = px.histogram(car_data, x=column, title=f"Histograma de {column}")
-        st.plotly_chart(fig)
+st.write("Tabla de dispersión entre las variables numéricas:")
+
+# Seleccionar columnas numéricas para la tabla de dispersión
+numeric_columns = car_data.select_dtypes(include='number').columns.tolist()
+
+# Crear un gráfico de dispersión usando plotly_express
+scatter_matrix = px.scatter_matrix(car_data, dimensions=numeric_columns, title="Matriz de Dispersión")
+st.plotly_chart(scatter_matrix)    
